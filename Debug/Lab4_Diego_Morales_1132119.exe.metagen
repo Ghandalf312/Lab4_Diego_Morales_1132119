@@ -19,3 +19,4 @@ Class Lab4DiegoMorales1132119.MyForm: AutoLayout, AnsiClass, Class, Public, Befo
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     MostrarLista(): PrivateScope, Public, HideBySig
+    Burbuja(Int32* IsConst IsConst, Int32): PrivateScope, Public, HideBySig

@@ -23,3 +23,32 @@ void Lista::Push(int value) {
 		(First->siguiente)->anterior = First;//El elemento ingresado su vuelve el primero
 	}
 }
+int Lista::Pop() {
+	if (First != nullptr)
+	{
+		int x = First->NatNumber.NatNumber;
+		Nodo* aux = First;
+		First = aux->siguiente;
+		delete aux;
+		return x;
+	}
+
+}
+int Lista::Size()
+{
+	Nodo* NewValue = new Nodo;
+	NewValue = First;
+	int Cant = 1;
+	while (NewValue->siguiente != First)
+	{
+		Cant++;
+		NewValue = NewValue->siguiente;
+	}
+	return Cant;
+}
+void Lista::LimpiarLista() 
+{
+	Nodo* aux = new Nodo();
+	First = aux;
+	Last = aux;
+}

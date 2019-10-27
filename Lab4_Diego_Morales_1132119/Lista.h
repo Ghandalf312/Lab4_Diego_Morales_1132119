@@ -7,5 +7,8 @@ public:
 	Nodo* First;
 	Nodo* Last;
 	void Push(int valor);
+	int Pop();
+	int Size();
+	void LimpiarLista();
 	bool IsEmpty();
 };
