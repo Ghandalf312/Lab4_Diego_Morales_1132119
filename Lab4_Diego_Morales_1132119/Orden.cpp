@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-void Orden::Burbuja(int A[], int n) {
+void Orden::Burbuja(int* A[], int n) {
 	int aux, i, j;
 	for (i = 0; i < n - 1; i++)
 	{
@@ -10,9 +10,9 @@ void Orden::Burbuja(int A[], int n) {
 		{
 			if (A[i] > A[j])
 			{
-				aux = A[i];
+				aux = *A[i];
 				A[i] = A[j];
-				A[j] = aux;
+				*A[j] = aux;
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 #pragma once
 #include "Pokemon.h"
 #include "Lista.h"
-//#include "Orden.h"
+#include "Orden.h"
 namespace Lab4DiegoMorales1132119 {
 
 	using namespace System;
@@ -91,6 +91,7 @@ namespace Lab4DiegoMorales1132119 {
 			this->btnStupid->TabIndex = 2;
 			this->btnStupid->Text = L"Stupid Sort";
 			this->btnStupid->UseVisualStyleBackColor = true;
+			this->btnStupid->Click += gcnew System::EventHandler(this, &MyForm::BtnStupid_Click);
 			// 
 			// btnQuick
 			// 
@@ -100,6 +101,7 @@ namespace Lab4DiegoMorales1132119 {
 			this->btnQuick->TabIndex = 3;
 			this->btnQuick->Text = L"Quick Sort";
 			this->btnQuick->UseVisualStyleBackColor = true;
+			this->btnQuick->Click += gcnew System::EventHandler(this, &MyForm::BtnQuick_Click);
 			// 
 			// btnBubble
 			// 
@@ -129,9 +131,10 @@ namespace Lab4DiegoMorales1132119 {
 #pragma endregion
 		Lista* MiLista = new Lista();
 		Pokemon* MiPokemon = new Pokemon();
+		Orden* MiOrden = new Orden();
 		//int VectorLista[70];
 	private: System::Void BtnMostrar_Click(System::Object^ sender, System::EventArgs^ e) {
-		StreamReader^ streamReader = gcnew StreamReader("C:/Users/Diego/source/repos/Lab4_Diego_Morales_1132119/ListaPokemon.txt");
+		StreamReader^ streamReader = gcnew StreamReader("..//ListaPokemon.txt");
 
 		String^ textoDelArchivo = streamReader->ReadToEnd();
 		String^ palabra; //nombre del pokemon
@@ -190,6 +193,8 @@ namespace Lab4DiegoMorales1132119 {
 		}
 	}
 	private: System::Void BtnBubble_Click(System::Object^ sender, System::EventArgs^ e) {
+		Stopwatch^ Timer = gcnew Stopwatch();
+		Timer->Start();
 		//Orden MiOrden;
 		Nodo* aux;
 		int ValoresLista[70] = { 11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11 };
@@ -229,7 +234,8 @@ namespace Lab4DiegoMorales1132119 {
 				MiLista->Push(ValoresLista[i]);
 			}
 		}
-		auxB = 0;
+		Timer->Stop();
+		System::Windows::Forms::MessageBox::Show("Tiempo de ejecución: " + System::Convert::ToString(Timer->Elapsed));
 	}
 
 
@@ -248,5 +254,58 @@ namespace Lab4DiegoMorales1132119 {
 			}
 		}
 	}
+private: System::Void BtnQuick_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stopwatch^ Timer = gcnew Stopwatch();
+	Timer->Start();
+	Nodo* aux;
+	//int* ValoresLista[70];
+	int ValoresLista[70] = { 11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	int count = 0;
+	aux = MiLista->First;
+
+	while (aux != nullptr && ValoresLista[count] == 11)
+	{
+		ValoresLista[count] = aux->NatNumber.NatNumber;
+		aux = aux->siguiente;
+		count++;
+	}
+	MiOrden->Quick(ValoresLista,0,70);
+
+	MiLista->LimpiarLista();
+	for (int i = 0; i < 70; i++)
+	{
+		if (ValoresLista[i] != 11) {
+			MiLista->Push(ValoresLista[i]);
+		}
+	}
+	Timer->Stop();
+	System::Windows::Forms::MessageBox::Show("Tiempo de ejecución: " + System::Convert::ToString(Timer->Elapsed));
+}
+private: System::Void BtnStupid_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stopwatch^ Timer = gcnew Stopwatch();
+	Timer->Start();
+	Nodo* aux;
+	int ValoresLista[70] = { 11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	int count = 0;
+	aux = MiLista->First;
+
+	while (aux != nullptr && ValoresLista[count] == 11)
+	{
+		ValoresLista[count] = aux->NatNumber.NatNumber;
+		aux = aux->siguiente;
+		count++;
+	}
+	MiOrden->Stupid(ValoresLista, 70);
+
+	MiLista->LimpiarLista();
+	for (int i = 0; i < 70; i++)
+	{
+		if (ValoresLista[i] != 11) {
+			MiLista->Push(ValoresLista[i]);
+		}
+	}
+	Timer->Stop();
+	System::Windows::Forms::MessageBox::Show("Tiempo de ejecución: " + System::Convert::ToString(Timer->Elapsed));
+}
 };
 }
