@@ -134,7 +134,7 @@ namespace Lab4DiegoMorales1132119 {
 		Orden* MiOrden = new Orden();
 		//int VectorLista[70];
 	private: System::Void BtnMostrar_Click(System::Object^ sender, System::EventArgs^ e) {
-		StreamReader^ streamReader = gcnew StreamReader("..//ListaPokemon.txt");
+		StreamReader^ streamReader = gcnew StreamReader("ListaPokemon.txt");
 
 		String^ textoDelArchivo = streamReader->ReadToEnd();
 		String^ palabra; //nombre del pokemon
