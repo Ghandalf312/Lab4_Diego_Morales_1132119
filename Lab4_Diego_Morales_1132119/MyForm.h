@@ -2,6 +2,9 @@
 #include "Pokemon.h"
 #include "Lista.h"
 #include "Orden.h"
+//#include <iostream>
+//#include <string>
+//#include <msclr\marshal_cppstd.h>
 namespace Lab4DiegoMorales1132119 {
 
 	using namespace System;
@@ -12,6 +15,8 @@ namespace Lab4DiegoMorales1132119 {
 	using namespace System::Drawing;
 	using namespace System::IO;
 	using namespace System::Diagnostics;
+	/*using namespace std;
+	using namespace msclr::interop;*/
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -135,8 +140,8 @@ namespace Lab4DiegoMorales1132119 {
 		//int VectorLista[70];
 	private: System::Void BtnMostrar_Click(System::Object^ sender, System::EventArgs^ e) {
 		StreamReader^ streamReader = gcnew StreamReader("ListaPokemon.txt");
-
 		String^ textoDelArchivo = streamReader->ReadToEnd();
+
 		String^ palabra; //nombre del pokemon
 		String^ numeroReg;
 		String^ numeroNac;
@@ -162,10 +167,12 @@ namespace Lab4DiegoMorales1132119 {
 
 			//almacenar en estructura
 			//std::string standardString = marshal_as<std::string>(managedString);
-			//MiPokemon.Nombre = marshal_as<std::string>(palabra);
-			//MiPokemon.GenNumber = int::Parse(numeroReg);
+			/*MiPokemon->Nombre = marshal_as<std::string>(palabra);*/
+			MiPokemon->GenNumber = int::Parse(numeroReg);
 			MiPokemon->NatNumber = int::Parse(numeroNac);
 			int Nac = MiPokemon->NatNumber;
+			int Reg = MiPokemon->GenNumber;
+			//std::string Name = MiPokemon->Nombre;
 			MiLista->Push(Nac);
 			
 		}
@@ -186,10 +193,49 @@ namespace Lab4DiegoMorales1132119 {
 			Aux = Aux->siguiente;
 		}
 		i = 0;
-		while (VectorLista[i] != 11 && i <= 69)
+		for (int j = 0; j < 70; j++)
 		{
-			listBox1->Items->Add(VectorLista[i]);
-			i++;
+			StreamReader^ Texto = gcnew StreamReader("ListaPokemon.txt");
+
+			String^ Cadena;
+			String^ cadenafinal;
+			String^ x;
+			String^ y;
+			String^ z;
+			String^ aux1;
+			int postexto = 0;
+			bool LoEncontro = false;
+
+			while (LoEncontro == false)
+			{
+				Cadena = Texto->ReadLine();
+				cadenafinal = Cadena;
+
+				postexto = Cadena->IndexOf(",");
+				x = Cadena->Substring(0, postexto);
+				aux1 = Cadena;
+				Cadena = aux1->Substring(postexto + 1);
+
+				postexto = Cadena->IndexOf(",");
+				y = Cadena->Substring(0, postexto);
+				aux1 = Cadena;
+				Cadena = aux1->Substring(postexto + 1);
+
+				postexto = Cadena->IndexOf(",");
+				z = Cadena->Substring(0, postexto);
+				aux1 = Cadena;
+				Cadena = aux1->Substring(postexto + 1);
+
+				int N = int::Parse(z);
+				cadenafinal = x + ", " + y +", " + z;
+				if (N == VectorLista[i])
+				{
+					LoEncontro = true;
+					listBox1->Items->Add(cadenafinal);
+					i++;
+				}
+			}
+			Texto->Close();
 		}
 	}
 	private: System::Void BtnBubble_Click(System::Object^ sender, System::EventArgs^ e) {

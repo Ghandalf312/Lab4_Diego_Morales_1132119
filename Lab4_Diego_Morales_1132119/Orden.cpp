@@ -1,7 +1,9 @@
 #include "Orden.h"
-#include<stdlib.h>
-#include<time.h>
-
+#include <stdlib.h>
+#include <time.h>
+//#include <iostream>
+//#include <string>
+//using namespace std;
 void Orden::Burbuja(int* A[], int n) {
 	int aux, i, j;
 	for (i = 0; i < n - 1; i++)

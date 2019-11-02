@@ -1,4 +1,7 @@
 #include "Lista.h"
+//#include <iostream>
+//#include <string>
+//using namespace std;
 bool Lista::IsEmpty()
 {
 	return First == nullptr;
